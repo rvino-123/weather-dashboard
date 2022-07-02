@@ -57,9 +57,7 @@ const buildDashboard = async (city) => {
     // restores container once data has loaded
     CONTAINER.style.display = 'block'
   } catch (error) {
-    localStorage.removeItem("city")
-    alert("Error: This city does not exist.")
-    location.reload()
+    console.log(error)
   }
 }
 
