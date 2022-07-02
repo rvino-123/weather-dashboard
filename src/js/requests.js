@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const BASE_WEATHER_URL = 'https://api.openweathermap.org/data/2.5/onecall'
-const BASE_GEOLOCATION_URL = 'http://api.openweathermap.org/geo/1.0/direct'
+const BASE_GEOLOCATION_URL = 'https://api.openweathermap.org/geo/1.0/direct'
 const API_KEY = '3820ef6fe8b3609b65a28b81357b8323'
 const API_KEY_HEADER = 'appid'
 const ADDITONAL_WEATHER_PARAMS = {
