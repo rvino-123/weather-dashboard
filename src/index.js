@@ -20,6 +20,8 @@ const PREV = document.querySelector('.prev')
 const DOTS = document.querySelectorAll('.dot')
 const MAG_GLASS = document.querySelector('#mag-glass')
 
+CONTAINER.style.display = 'none'
+
 // onload: get user's location and submit
 
 const buildDashboard = async (city) => {
@@ -77,16 +79,5 @@ NEXT.addEventListener('click', getNextSlide)
 PREV.addEventListener('click', getPrevSlide)
 MAG_GLASS.addEventListener('click', getUserInput)
 
-// Add geoplugin API and build dashboard using userId
-let script = document.createElement('script')
-script.async = true
-script.setAttribute('src', 'http://www.geoplugin.net/javascript.gp')
-document.head.appendChild(script)
-script.onload = () => {
-  let city = localStorage.getItem('city')
-  if (!city) {
-    city = geoplugin_city()
-    localStorage.setItem('city', city)
-  }
-  buildDashboard(city)
-}
+
+buildDashboard('london')
