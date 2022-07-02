@@ -7,7 +7,7 @@ const DAYS_OF_THE_WEEK = {
   3: 'Wednesday',
   4: 'Thursday',
   5: 'Friday',
-  6: 'Satuday',
+  6: 'Saturday',
 }
 
 const MONTHS = {

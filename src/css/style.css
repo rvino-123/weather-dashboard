@@ -140,6 +140,15 @@ body {
   left: 3%;
 }
 
+.input-error-span {
+  display: block;
+  font-size: 0.8rem;
+  color: red;
+  font-weight: bold;
+  float: right;
+  margin-right: 1.7rem;
+}
+
 .dot {
   cursor: pointer;
   height: 10px;
@@ -159,8 +168,10 @@ body {
 
 .search-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: right;
   align-items: center;
-  border-bottom: 2px solid white;
+
 }
 
 .fade {
@@ -168,9 +179,11 @@ body {
   animation-duration: 2s;
 }
 
-#hide {
+.hide {
   display: none;
 }
+
+
 
 #location {
   width: 100%;
@@ -187,6 +200,7 @@ body {
   font-weight: bold;
   font-size: 0.8rem;
   text-shadow: 1px 1px 1px black;
+    border-bottom: 2px solid white;
 }
 
 #location-input::placeholder {
@@ -198,6 +212,8 @@ body {
 #location-input:focus {
   outline: none;
 }
+
+
 #mag-glass {
   height: 1.2rem;
   width: 1.2rem;
