@@ -5,12 +5,13 @@ import {
   generateLocationString,
   getDateString,
   clearChildrenFromNode,
+  getUserInput
 } from './js/utils'
 import { getNextSlide, getPrevSlide, generateSlideHTML } from './js/slider'
-import { handleInputError,clearInputError  } from './js/errorHandler'
+import { handleError  } from './js/errorHandler'
 
 // get elements from the DOM
-const CONTAINER = document.querySelector('.container')
+const CONTAINER_BODY = document.querySelector('.container-body')
 const DEGREES = document.querySelector('.degrees')
 const LOCATION = document.querySelector('#location')
 const DATE = document.querySelector('.todays-date')
@@ -21,14 +22,15 @@ const NEXT = document.querySelector('.next')
 const PREV = document.querySelector('.prev')
 const DOTS = document.querySelectorAll('.dot')
 const MAG_GLASS = document.querySelector('#mag-glass')
+const LOADER = document.querySelector('.loader')
 
-CONTAINER.style.display = 'none'
 
 // onload: get user's location and submit
 
 const buildDashboard = async (city) => {
   // hides main container until data is loaded
-  CONTAINER.style.display = 'none'
+  CONTAINER_BODY.style.display = 'none'
+  LOADER.classList.remove('hide')
   // Clears current slides
   clearChildrenFromNode(SLIDING_CONTAINER)
   // Get current date/time and add to dashbaord
@@ -38,11 +40,10 @@ const buildDashboard = async (city) => {
   DATE.innerHTML = getDateString(now)
 
   // Get City Coordinates and add location to dashboard
-  // TODO: if city not in local storage, ask user
   const cityRaw = await getCoordinatesFromCityName(city)
   if (!cityRaw.data.length) {
     loadApp(localStorage.getItem('city'))
-    handleInputError('Error: City does not exist', INPUT_ERROR)
+    handleError('Error: City Does Not Exist', INPUT_ERROR)
   }
   const { name, country, lat, lon } = cityRaw.data[0]
   const cityString = generateLocationString(name, country)
@@ -60,43 +61,45 @@ const buildDashboard = async (city) => {
   slides[1].style.display = 'none'
   DOTS[0].classList.add('active')
   // restores container once data has loaded
-  CONTAINER.style.display = 'block'
+  LOADER.classList.add('hide')
+  CONTAINER_BODY.style.display = 'flex'
   localStorage.setItem('city', city)
 }
 
-const getUserInput = () => {
+function handleSubmit() {
   try {
-    const userInput = INPUT.value
-    if (!/^[a-zA-Z]+$/.test(userInput)) {
-      throw new Error('non-alphabetic chars now allowed')
-    }
-
-    INPUT.value = ''
-    return userInput
+    const userInput = getUserInput(INPUT)
+    loadApp(userInput)
+    
   } catch (error) {
-    INPUT.value = ''
-    handleInputError(error, INPUT_ERROR)
+    handleError(error, INPUT_ERROR)
   }
 }
+
 
 // Event Listeners
 NEXT.addEventListener('click', getNextSlide)
 PREV.addEventListener('click', getPrevSlide)
-MAG_GLASS.addEventListener('click', getUserInput)
+MAG_GLASS.addEventListener('click', handleSubmit)
 INPUT.addEventListener('keydown', (e) => {
   if (e.key.charCodeAt() === 69) {
-    const city = getUserInput()
-    clearInputError(INPUT_ERROR)
-
-    loadApp(city.toLowerCase())
+    handleSubmit()
   }
 })
 
+// Starts App
 function loadApp(city) {
   try {
     buildDashboard(city)
   } catch (error) {
-    handleInputError(error, INPUT_ERROR)
+    handleError(error, INPUT_ERROR)
   }
 }
-loadApp('london')
+
+(function start() {
+  let city = localStorage.getItem('city')
+  if (!city) {
+    city = 'london'
+  }
+  loadApp(city)
+})()

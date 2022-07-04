@@ -26,7 +26,7 @@ const MONTHS = {
 }
 
 // getDateStringFromMs
-function getDateString(dt, isUnix) {
+export function getDateString(dt, isUnix) {
   let date
   if (isUnix) {
     date = new Date(dt * 1000)
@@ -38,7 +38,7 @@ function getDateString(dt, isUnix) {
   } ${date.getFullYear()}`
 }
 
-function generateHourString(dt) {
+export function generateHourString(dt) {
   const hours = new Date(dt * 1000).getHours()
 
   if (hours === 0) {
@@ -52,21 +52,24 @@ function generateHourString(dt) {
   }
 }
 
-function generateLocationString(city, countryCode) {
+export function generateLocationString(city, countryCode) {
   const country = countries.filter((country) => country.code === countryCode)[0]
     .name
 
   return `${city}, ${country}`
 }
 
-function clearChildrenFromNode(parent) {
+export function clearChildrenFromNode(parent) {
   parent.innerHTML = ''
   return
 }
 
-export {
-  getDateString,
-  generateHourString,
-  generateLocationString,
-  clearChildrenFromNode,
+export function getUserInput(inputElement) {
+  const numericRegex = /^[0-9]+$/;
+  const userInput = inputElement.value
+  if (userInput.match(numericRegex)) {
+    throw new Error("City Name Can't Contain a Number")
+  }
+  inputElement.value = ''
+  return userInput.toLowerCase()
 }

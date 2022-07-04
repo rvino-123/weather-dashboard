@@ -6,11 +6,9 @@ const API_KEY = '3820ef6fe8b3609b65a28b81357b8323'
 const API_KEY_HEADER = 'appid'
 const ADDITONAL_WEATHER_PARAMS = {
   exclude: 'minutes,alerts',
-  units: 'metric'
+  units: 'metric',
 }
-const ADDITONAL_GEOLOCATION_PARAMS = {
-  
-}
+const ADDITONAL_GEOLOCATION_PARAMS = {}
 
 async function axiosRequestBuilder(baseURL, method, params) {
   const config = {
@@ -31,7 +29,7 @@ async function getWeatherForecast(lat, lon) {
     [API_KEY_HEADER]: API_KEY,
   })
     .then((response) => response)
-    .catch((err) => alert(err))
+    .catch((err) => err)
 }
 
 // Geolocation
@@ -42,8 +40,8 @@ async function getCoordinatesFromCityName(cityName) {
     ...ADDITONAL_GEOLOCATION_PARAMS,
     [API_KEY_HEADER]: API_KEY,
   })
-  .then((response) => response)
-  .catch((err) => alert(err))
+    .then((response) => response)
+    .catch((err) => err)
   return coords
 }
 

@@ -1,9 +1,12 @@
-export function handleInputError(message, target) {
+export function handleError(message, target) {
   target.innerHTML = message
   target.classList.remove('hide')
+  setTimeout(() => {
+    clearError(target)
+  }, 3000);
 }
 
-export function clearInputError(target) {
+function clearError(target) {
   target.innerHTML = ""
   target.classList.add('hide')
 }

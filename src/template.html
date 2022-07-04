@@ -9,6 +9,7 @@
 </head>
 <body>
   <div class="container">
+
     <div class="container-header">
       <span class="todays-date"></span>
       <div class="search-container">
@@ -16,23 +17,23 @@
           <img src="./assets/search_FILL0_wght400_GRAD0_opsz24.svg" id="mag-glass" />
       </div>
     </div>
-    <div>
-      <span class="input-error-span hide">Error: City does not exist</span>
+    <div class="error-div">
+      <span class="input-error-span hide"></span>
     </div>
-    <h3 id="location"></h3>
-    <div class="degrees-container">
-      <span class="degrees"></span>
-    </div>
-    <div class="sliding-container">
-      
+        <div class="loader hide"></div>
+    <div class="container-body fade">
+      <h3 id="location"></h3>
+      <div class="degrees-container">
+        <span class="degrees"></span>
       </div>
-      <a class="prev">&#10094</a>
-      <a class="next">&#10095</a>
-      <div style="text-align:center">
-        <span class="dot" id="1"></span>
-        <span class="dot" id="2"></span>
+      <div class="sliding-container"></div>
+        <a class="prev">&#10094</a>
+        <a class="next">&#10095</a>
+        <div style="text-align:center">
+          <span class="dot" id="1"></span>
+          <span class="dot" id="2"></span>
+        </div>
       </div>
-    </div>
   </div>
 
 </body>

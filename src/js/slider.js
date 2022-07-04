@@ -47,8 +47,8 @@ function showSlides(newSlideIndex) {
 }
 
 function generateForeCastContainer(hourlyWeatherData, limit, parent) {
+  // iterates based on number of forecasts each slide should have
   for (let i = 0; i < limit; i++) {
-    console.log(hourlyWeatherData)
     const hourlyForecastContainer = document.createElement('div')
     hourlyForecastContainer.classList.add('hourly-forecast-container')
     const hourlyForecastTime = document.createElement('div')
@@ -68,6 +68,7 @@ function generateForeCastContainer(hourlyWeatherData, limit, parent) {
 }
 
 function generateSlideHTML(weatherData, limit, iterations, parent) {
+  // Iterates based on how many slides are required
   for (let i = 1; i <= iterations; i++) {
     const slide = document.createElement('div')
     slide.classList.add('slide')
@@ -75,7 +76,7 @@ function generateSlideHTML(weatherData, limit, iterations, parent) {
     const start = (i - 1) * limit
     const finish = (i - 1) * limit + iterations * 2
     console.log(start, finish)
-    generateForeCastContainer(weatherData.slice(start, finish), limit, slide)
+    generateForeCastContainer(weatherData.slice(start + 1, finish + 1), limit, slide)
     parent.appendChild(slide)
   }
 }
